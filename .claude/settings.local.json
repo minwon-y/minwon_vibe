@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(pip install pandas)",
+      "PowerShell($env:PATH += \";C:\\\\Program Files\\\\Git\\\\bin\"; cd \"c:\\\\Users\\\\byngm\\\\OneDrive\\\\바탕 화면\\\\minwon_vibe\\\\study_01\"; git init; git add .; git commit -m \"Initial commit: handwritten digit recognizer\")",
+      "PowerShell($env:PATH += \";C:\\\\Program Files\\\\Git\\\\bin\"; cd \"c:\\\\Users\\\\byngm\\\\OneDrive\\\\바탕 화면\\\\minwon_vibe\\\\study_01\"; git config --global user.email \"minwi0904@gmail.com\"; git config --global user.name \"byngm\"; git commit -m \"Initial commit: handwritten digit recognizer\")",
+      "PowerShell($env:PATH += \";C:\\\\Program Files\\\\Git\\\\bin\"; Remove-Item -Recurse -Force \"c:\\\\Users\\\\byngm\\\\OneDrive\\\\바탕 화면\\\\minwon_vibe\\\\study_01\\\\.git\"; cd \"c:\\\\Users\\\\byngm\\\\OneDrive\\\\바탕 화면\\\\minwon_vibe\"; git init; git add .; git commit -m \"Initial commit: handwritten digit recognizer\")"
+    ]
+  }
+}
