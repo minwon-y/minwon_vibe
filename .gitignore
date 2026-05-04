@@ -1,0 +1,5 @@
+# Claude Code internal files
+.claude/
+
+# Trained model binaries (large files)
+*.pkl
