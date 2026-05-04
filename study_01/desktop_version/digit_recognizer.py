@@ -180,10 +180,32 @@ class DigitRecognizerApp:
     # Prediction
     # ------------------------------------------------------------------
 
+    def _preprocess(self, img: Image.Image) -> np.ndarray:
+        """Center the drawn digit and resize to 28x28 to match MNIST format."""
+        arr  = np.array(img)
+        rows = np.any(arr > 10, axis=1)
+        cols = np.any(arr > 10, axis=0)
+        if not rows.any():
+            return np.zeros((1, 784), dtype=np.float32)
+
+        rmin, rmax = np.where(rows)[0][[0, -1]]
+        cmin, cmax = np.where(cols)[0][[0, -1]]
+        cropped = arr[rmin:rmax + 1, cmin:cmax + 1]
+
+        h, w   = cropped.shape
+        pad    = max(h, w) // 4
+        size   = max(h, w) + pad * 2
+        canvas = np.zeros((size, size), dtype=np.uint8)
+        y0 = (size - h) // 2
+        x0 = (size - w) // 2
+        canvas[y0:y0 + h, x0:x0 + w] = cropped
+
+        out = Image.fromarray(canvas).resize((MNIST_SIZE, MNIST_SIZE), Image.LANCZOS)
+        return np.array(out, dtype=np.float32).flatten().reshape(1, -1)
+
     def _predict(self):
-        """Resize the drawn image to 28×28, run inference, and display results."""
-        img_small  = self.pil_image.resize((MNIST_SIZE, MNIST_SIZE), Image.LANCZOS)
-        img_array  = np.array(img_small, dtype=np.float32).flatten().reshape(1, -1)
+        """Center-crop the drawn image to 28×28, run inference, and display results."""
+        img_array  = self._preprocess(self.pil_image)
         img_scaled = self.scaler.transform(img_array)
 
         prediction   = self.clf.predict(img_scaled)[0]
