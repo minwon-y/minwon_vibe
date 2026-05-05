@@ -171,6 +171,16 @@ body {
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
 }
 
+/* 자동 분류 감지 시 반짝임 */
+@keyframes autoDetect {
+  0%   { box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5); border-color: var(--color-업무); }
+  100% { box-shadow: none; }
+}
+
+.category-select.auto-detected {
+  animation: autoDetect 0.6s ease forwards;
+}
+
 .add-btn {
   padding: 10px 20px;
   background: var(--color-업무);

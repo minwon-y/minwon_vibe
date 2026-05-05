@@ -4,6 +4,24 @@ const STORAGE_KEY = 'myDailyTodos';
 const THEME_KEY   = 'myDailyTodosTheme';
 const CATEGORIES  = ['업무', '개인', '공부'];
 
+const KEYWORDS = {
+  '업무': [
+    '회의', '미팅', '보고서', '발표', '기획', '업무', '출장',
+    '마감', '프로젝트', '메일', '이메일', '계획서', '제안서',
+    '클라이언트', '거래처', '결재', '검토', '피드백', '협의',
+  ],
+  '개인': [
+    '운동', '헬스', '요가', '친구', '가족', '여행', '영화',
+    '쇼핑', '청소', '요리', '병원', '약속', '산책', '드라마',
+    '게임', '취미', '음악', '카페', '식사', '장보기',
+  ],
+  '공부': [
+    '공부', '강의', '책', '시험', '과제', '숙제', '학습',
+    '강좌', '수업', '복습', '예습', '문제', '퀴즈', '코딩',
+    '프로그래밍', '알고리즘', '개념', '정리', '독서', '노트',
+  ],
+};
+
 // ── 상태 ─────────────────────────────────────────────────────────────────────
 let todos         = [];
 let currentFilter = '전체';
@@ -264,6 +282,39 @@ todoList.addEventListener('click', e => {
 filterTabs.addEventListener('click', e => {
   const btn = e.target.closest('.filter-btn');
   if (btn) setFilter(btn.dataset.filter);
+});
+
+// ── 키워드 기반 자동 카테고리 분류 ───────────────────────────────────────────
+function detectCategory(text) {
+  const lower = text.toLowerCase();
+  let best = null;
+  let bestScore = 0;
+
+  for (const [cat, keywords] of Object.entries(KEYWORDS)) {
+    const score = keywords.filter(kw => lower.includes(kw)).length;
+    if (score > bestScore) {
+      bestScore = score;
+      best = cat;
+    }
+  }
+  return best; // 매칭 키워드 없으면 null
+}
+
+function flashCategorySelect() {
+  categorySelect.classList.remove('auto-detected');
+  void categorySelect.offsetWidth; // 같은 애니메이션 재시작을 위한 reflow
+  categorySelect.classList.add('auto-detected');
+  categorySelect.addEventListener('animationend', () => {
+    categorySelect.classList.remove('auto-detected');
+  }, { once: true });
+}
+
+todoInput.addEventListener('input', () => {
+  const detected = detectCategory(todoInput.value);
+  if (detected && detected !== categorySelect.value) {
+    categorySelect.value = detected;
+    flashCategorySelect();
+  }
 });
 
 // ── 입력 이벤트 ───────────────────────────────────────────────────────────────
