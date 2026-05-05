@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>미넌이의 오늘의 할일</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- 헤더 -->
+    <header class="app-header">
+      <div class="app-header-left">
+        <h1 class="app-title">🌸 미넌이의 오늘의 할일 🌸</h1>
+        <p class="daily-quote" id="dailyQuote"></p>
+      </div>
+      <button class="theme-btn" id="themeBtn" aria-label="테마 전환">다크</button>
+    </header>
+
+    <!-- 진행률 (전체 너비) -->
+    <section class="progress-section">
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" style="width: 0%"></div>
+      </div>
+      <div class="progress-info">
+        <span class="progress-text">전체 0% (0/0)</span>
+        <span class="progress-category">🐻 0/0 · 🐰 0/0 · 🦔 0/0</span>
+      </div>
+    </section>
+
+    <!-- 2열 레이아웃 -->
+    <div class="workspace">
+
+      <!-- 사이드바 -->
+      <aside class="sidebar">
+        <p class="sidebar-label">필터</p>
+        <nav class="filter-tabs">
+          <button class="filter-btn active" data-filter="전체">🌸 전체</button>
+          <button class="filter-btn" data-filter="업무">🐻 업무</button>
+          <button class="filter-btn" data-filter="개인">🐰 개인</button>
+          <button class="filter-btn" data-filter="공부">🦔 공부</button>
+        </nav>
+
+        <p class="sidebar-label">정렬</p>
+        <select class="sort-select" id="sortSelect">
+          <option value="최신순">최신순</option>
+          <option value="오래된순">오래된순</option>
+          <option value="미완료먼저">미완료 먼저</option>
+          <option value="카테고리순">카테고리순</option>
+        </select>
+
+        <div class="sidebar-divider"></div>
+
+        <button class="data-btn" id="exportBtn">📥 내보내기</button>
+        <button class="data-btn" id="importBtn">📤 가져오기</button>
+        <input type="file" id="importFile" accept=".json" style="display:none" />
+      </aside>
+
+      <!-- 메인 콘텐츠 -->
+      <main class="main-content">
+
+        <!-- 입력 -->
+        <section class="input-section">
+          <input
+            type="text"
+            class="todo-input"
+            placeholder="오늘 할 일을 적어봐요 🐾"
+            autofocus
+          />
+          <select class="category-select">
+            <option value="업무">🐻 업무</option>
+            <option value="개인">🐰 개인</option>
+            <option value="공부">🦔 공부</option>
+          </select>
+          <button class="add-btn">추가</button>
+        </section>
+
+        <!-- 할 일 목록 -->
+        <section class="todo-list-section">
+          <ul class="todo-list">
+            <li class="todo-empty">🌷 할 일이 없어요. 새로 추가해봐요!</li>
+          </ul>
+        </section>
+
+      </main>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

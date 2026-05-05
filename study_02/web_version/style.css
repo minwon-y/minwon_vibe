@@ -1,0 +1,543 @@
+/* ── Google Fonts ── */
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+/* ── CSS 변수 ── */
+:root {
+  --color-업무: #9b8cd4;
+  --color-개인: #5ec4a0;
+  --color-공부: #f48fb1;
+
+  --accent:         #f06292;
+  --bg:             #fff5f9;
+  --surface:        #ffffff;
+  --border:         #ffd6e7;
+  --text-primary:   #4a3060;
+  --text-secondary: #9b7eb8;
+  --radius:         16px;
+  --sidebar-width:  220px;
+}
+
+body.dark {
+  --bg:             #1a0d2e;
+  --surface:        #2d1b45;
+  --border:         #4a2d6b;
+  --text-primary:   #f0e6ff;
+  --text-secondary: #b8a0d4;
+}
+
+/* ── 리셋 & 베이스 ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Jua', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  min-height: 100vh;
+  padding: 32px 40px 60px;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* ── 컨테이너 ── */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── 헤더 ── */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+}
+
+.app-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.app-title {
+  font-size: 1.9rem;
+  font-weight: 400;
+  color: var(--accent);
+  letter-spacing: -0.3px;
+}
+
+.daily-quote {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.theme-btn {
+  padding: 7px 20px;
+  border: 1.5px solid var(--border);
+  border-radius: 99px;
+  background: var(--surface);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.theme-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ── 진행률 ── */
+.progress-section {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.progress-bar-track {
+  height: 12px;
+  background: var(--border);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: var(--accent);
+  transition: width 0.35s ease, background-color 0.4s ease;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.progress-text {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.progress-category {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.5px;
+}
+
+/* ── 2열 레이아웃 ── */
+.workspace {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* ── 사이드바 ── */
+.sidebar {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: sticky;
+  top: 24px;
+}
+
+.sidebar-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  padding: 4px 4px 0;
+  letter-spacing: 0.5px;
+}
+
+.sidebar-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 4px 0;
+}
+
+/* ── 필터 탭 (사이드바: 세로) ── */
+.filter-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.filter-btn {
+  width: 100%;
+  padding: 9px 14px;
+  text-align: left;
+  background: transparent;
+  border: 1.5px solid transparent;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.filter-btn:hover {
+  background: var(--bg);
+  color: var(--text-primary);
+}
+
+.filter-btn.active {
+  color: #fff;
+  border-color: transparent;
+}
+
+.filter-btn.active[data-filter="전체"] { background: #c084d4; }
+.filter-btn.active[data-filter="업무"] { background: var(--color-업무); }
+.filter-btn.active[data-filter="개인"] { background: var(--color-개인); }
+.filter-btn.active[data-filter="공부"] { background: var(--color-공부); }
+
+/* ── 정렬 셀렉트 ── */
+.sort-select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-family: inherit;
+  color: var(--text-secondary);
+  background: var(--surface);
+  cursor: pointer;
+  outline: none;
+}
+
+/* ── 데이터 버튼 ── */
+.data-btn {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-family: inherit;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+
+.data-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(240, 98, 146, 0.05);
+}
+
+/* ── 메인 콘텐츠 ── */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── 입력 영역 ── */
+.input-section {
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.todo-input {
+  flex: 1;
+  padding: 12px 18px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--text-primary);
+  background: var(--surface);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.todo-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(240, 98, 146, 0.15);
+}
+
+.todo-input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+.category-select {
+  padding: 12px 10px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-family: inherit;
+  color: var(--text-primary);
+  background: var(--surface);
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.category-select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(240, 98, 146, 0.15);
+}
+
+.add-btn {
+  padding: 12px 28px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.15s, transform 0.1s;
+}
+
+.add-btn:hover  { opacity: 0.88; }
+.add-btn:active { transform: scale(0.97); }
+
+/* ── 자동 분류 반짝임 ── */
+@keyframes autoDetect {
+  0%   { box-shadow: 0 0 0 3px rgba(240, 98, 146, 0.5); border-color: var(--accent); }
+  100% { box-shadow: none; }
+}
+
+.category-select.auto-detected {
+  animation: autoDetect 0.6s ease forwards;
+}
+
+/* ── 할 일 목록 ── */
+.todo-list-section {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  min-height: 400px;
+}
+
+.todo-list {
+  list-style: none;
+  padding: 8px 0;
+}
+
+.todo-empty {
+  padding: 80px 0;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+/* ── 항목 등장 애니메이션 ── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── 할 일 항목 ── */
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  animation: fadeIn 0.12s ease;
+  transition: background 0.1s;
+}
+
+.todo-item:hover {
+  background: rgba(255, 214, 231, 0.15);
+}
+
+.todo-item:last-child {
+  border-bottom: none;
+}
+
+.todo-item--completed .todo-badge,
+.todo-item--completed .todo-text {
+  opacity: 0.45;
+}
+
+.todo-item--completed .todo-text {
+  text-decoration: line-through;
+}
+
+.todo-checkbox {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  cursor: pointer;
+  accent-color: var(--accent);
+}
+
+.todo-badge {
+  flex-shrink: 0;
+  padding: 4px 12px;
+  border-radius: 99px;
+  font-size: 0.8rem;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.badge-업무 { background: var(--color-업무); }
+.badge-개인 { background: var(--color-개인); }
+.badge-공부 { background: var(--color-공부); }
+
+.todo-text {
+  flex: 1;
+  font-size: 1rem;
+  word-break: break-word;
+  line-height: 1.4;
+}
+
+.todo-actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.todo-item:hover .todo-actions {
+  opacity: 1;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 5px 14px;
+  border-radius: 99px;
+  font-size: 0.82rem;
+  font-family: inherit;
+  cursor: pointer;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--text-secondary);
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.edit-btn:hover {
+  background: rgba(155, 140, 212, 0.15);
+  color: var(--color-업무);
+  border-color: var(--color-업무);
+}
+
+.delete-btn:hover {
+  background: rgba(244, 143, 177, 0.15);
+  color: var(--color-공부);
+  border-color: var(--color-공부);
+}
+
+.todo-edit-input {
+  flex: 1;
+  padding: 5px 12px;
+  border: 1.5px solid var(--accent);
+  border-radius: 99px;
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--text-primary);
+  background: var(--surface);
+  outline: none;
+}
+
+.todo-category-select {
+  flex-shrink: 0;
+  padding: 4px 10px;
+  border: 1.5px solid var(--accent);
+  border-radius: 99px;
+  font-size: 0.8rem;
+  font-family: inherit;
+  color: var(--text-primary);
+  background: var(--surface);
+  cursor: pointer;
+  outline: none;
+}
+
+/* ── 흔들림 애니메이션 ── */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
+}
+
+.shake {
+  animation: shake 0.3s ease;
+  border-color: var(--accent) !important;
+}
+
+/* ── 반응형 (태블릿·모바일) ── */
+@media (max-width: 768px) {
+  body {
+    padding: 20px 16px 48px;
+  }
+
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 14px;
+  }
+
+  .sidebar-label,
+  .sidebar-divider {
+    display: none;
+  }
+
+  .filter-tabs {
+    flex-direction: row;
+    overflow-x: auto;
+    flex: 1;
+    gap: 6px;
+  }
+
+  .filter-btn {
+    width: auto;
+    flex-shrink: 0;
+    padding: 7px 14px;
+    text-align: center;
+  }
+
+  .sort-select {
+    width: auto;
+  }
+
+  .data-btn {
+    width: auto;
+    padding: 7px 14px;
+  }
+
+  .todo-actions {
+    opacity: 1;
+  }
+
+  .input-section {
+    flex-wrap: wrap;
+  }
+
+  .todo-input {
+    flex-basis: 100%;
+  }
+
+  .category-select,
+  .add-btn {
+    flex: 1;
+  }
+}
