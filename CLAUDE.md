@@ -37,6 +37,7 @@ git push
 | 폴더 | 주제 |
 |------|------|
 | [study_01](study_01/CLAUDE.md) | 손글씨 숫자 인식 (MNIST + tkinter) |
+| [study_02](study_02/CLAUDE.md) | My Daily Todo (순수 HTML/CSS/JS 할 일 관리 웹앱) |
 
 ## 각 study 폴더 CLAUDE.md 작성 템플릿
 

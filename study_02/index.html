@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Daily Todo</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- 1. 타이틀 -->
+    <header class="app-header">
+      <h1 class="app-title">My Daily Todo</h1>
+      <button class="theme-btn" id="themeBtn" aria-label="테마 전환">다크</button>
+    </header>
+
+    <!-- 2. 진행률 -->
+    <section class="progress-section">
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" style="width: 0%"></div>
+      </div>
+      <div class="progress-info">
+        <span class="progress-text">전체 0% (0/0)</span>
+        <span class="progress-category">업무 0/0 · 개인 0/0 · 공부 0/0</span>
+      </div>
+    </section>
+
+    <!-- 3. 입력 영역 -->
+    <section class="input-section">
+      <input
+        type="text"
+        class="todo-input"
+        placeholder="할 일을 입력하세요"
+        autofocus
+      />
+      <select class="category-select">
+        <option value="업무">업무</option>
+        <option value="개인">개인</option>
+        <option value="공부">공부</option>
+      </select>
+      <button class="add-btn">추가</button>
+    </section>
+
+    <!-- 4. 필터 탭 -->
+    <nav class="filter-tabs">
+      <button class="filter-btn active" data-filter="전체">전체</button>
+      <button class="filter-btn" data-filter="업무">업무</button>
+      <button class="filter-btn" data-filter="개인">개인</button>
+      <button class="filter-btn" data-filter="공부">공부</button>
+    </nav>
+
+    <!-- 5. 할 일 목록 -->
+    <section class="todo-list-section">
+      <ul class="todo-list">
+        <li class="todo-empty">할 일이 없습니다</li>
+      </ul>
+    </section>
+
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
